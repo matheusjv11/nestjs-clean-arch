@@ -1,4 +1,5 @@
 import { Entity } from '@/shared/domain/entities/entity'
+import { EntityValidationError } from '@/shared/domain/errors/validation-errors'
 import { UserValidatorFactory } from '@/users/validators/user.validator'
 
 export type UserProps = {
@@ -54,6 +55,10 @@ export class UserEntity extends Entity {
 
   static validate(props: UserProps) {
     const validator = UserValidatorFactory.create()
-    validator.validate(props)
+    const isValid = validator.validate(props)
+
+    if (!isValid) {
+      throw new EntityValidationError(validator.errors)
+    }
   }
 }
