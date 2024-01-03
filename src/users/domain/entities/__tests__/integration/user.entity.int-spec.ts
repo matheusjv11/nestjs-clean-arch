@@ -110,7 +110,7 @@ describe('UserEntity integration tests', () => {
       expect(() => new UserEntity(props)).toThrow(EntityValidationError)
     })
 
-    it('Should be a valida user', () => {
+    it('Should be a valid user', () => {
       // With this validation, the test will throw an error if there is at least 1 exception
       expect.assertions(0)
 
@@ -119,6 +119,56 @@ describe('UserEntity integration tests', () => {
       }
 
       new UserEntity(props)
+    })
+  })
+
+  describe('Update method', () => {
+    it('Should throw an error when creating an user with invalid name', () => {
+      const entity = new UserEntity(UserDataBuilder({}))
+
+      expect(() => entity.update(null)).toThrow(EntityValidationError)
+      expect(() => entity.update('')).toThrow(EntityValidationError)
+      expect(() => entity.update(10 as any)).toThrow(EntityValidationError)
+      expect(() => entity.update('a'.repeat(256))).toThrow(
+        EntityValidationError,
+      )
+    })
+
+    it('Should be a valid user', () => {
+      expect.assertions(0)
+
+      let props: UserProps = {
+        ...UserDataBuilder({}),
+      }
+
+      const entity = new UserEntity(props)
+      entity.update('other name')
+    })
+  })
+
+  describe('Update password method', () => {
+    it('Should throw an error when creating an user with invalid password', () => {
+      const entity = new UserEntity(UserDataBuilder({}))
+
+      expect(() => entity.updatePassword(null)).toThrow(EntityValidationError)
+      expect(() => entity.updatePassword('')).toThrow(EntityValidationError)
+      expect(() => entity.updatePassword(10 as any)).toThrow(
+        EntityValidationError,
+      )
+      expect(() => entity.updatePassword('a'.repeat(301))).toThrow(
+        EntityValidationError,
+      )
+    })
+
+    it('Should be a valid user', () => {
+      expect.assertions(0)
+
+      let props: UserProps = {
+        ...UserDataBuilder({}),
+      }
+
+      const entity = new UserEntity(props)
+      entity.updatePassword('other password')
     })
   })
 })
