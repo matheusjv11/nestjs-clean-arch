@@ -9,7 +9,7 @@ export type UserProps = {
   createdAt?: Date
 }
 
-export class UserEntity extends Entity {
+export class UserEntity extends Entity<UserProps> {
   constructor(
     public readonly props: UserProps,
     id?: string,
