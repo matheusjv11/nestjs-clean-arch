@@ -1,6 +1,6 @@
 import { UpdatePasswordUseCase } from '@/users/application/usecases/update-password.usecase'
 
-export class UpdatePasswordUserDto
+export class UpdatePasswordDto
   implements Omit<UpdatePasswordUseCase.Input, 'id'>
 {
   password: string
