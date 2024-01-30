@@ -14,5 +14,5 @@ async function bootstrap() {
   await app.listen(3000, '0.0.0.0')
 }
 
-// Init nest application
+// Init nest application here
 bootstrap()
