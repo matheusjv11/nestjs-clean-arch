@@ -8,6 +8,7 @@ import { Reflector } from '@nestjs/core'
 import { ConflictErrorFilter } from './shared/exception-filters/conflict-error/conflict-error.filter'
 import { NotFoundErrorFilter } from './shared/exception-filters/not-found-error/not-found-error.filter'
 import { InvalidPasswordErrorFilter } from './shared/exception-filters/invalid-password-error/invalid-password-error.filter'
+import { InvalidCredentialsErrorFilter } from './shared/exception-filters/invalid-credentials-error/invalid-credentials-error.filter'
 
 export function applyGlobalConfig(app: INestApplication) {
   app.useGlobalPipes(
@@ -28,5 +29,6 @@ export function applyGlobalConfig(app: INestApplication) {
     new ConflictErrorFilter(),
     new NotFoundErrorFilter(),
     new InvalidPasswordErrorFilter(),
+    new InvalidCredentialsErrorFilter(),
   )
 }
