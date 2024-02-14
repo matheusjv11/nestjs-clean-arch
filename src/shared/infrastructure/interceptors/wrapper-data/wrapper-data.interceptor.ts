@@ -8,7 +8,7 @@ export class WrapperDataInterceptor implements NestInterceptor {
   ): Observable<any> {
     return next.handle().pipe(
       map(body => {
-        if (!body || 'meta' in body) {
+        if (!body || 'accessToken' in body || 'meta' in body) {
           return body
         }
 
